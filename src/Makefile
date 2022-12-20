@@ -20,11 +20,6 @@ s21_sscanf.a: s21_sscanf.o
 s21_sscanf.o:
 	gcc $(FLAGS) -c s21_sscanf.c
 
-format:
-	cp ../materials/linters/.clang-format ./
-	clang-format -i *.c *.h
-	rm .clang-format
-
 clean:
 	rm -rf s21_string
 	rm -rf *.o *.a
