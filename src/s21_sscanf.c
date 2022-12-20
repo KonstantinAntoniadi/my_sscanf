@@ -54,7 +54,7 @@ void parseAndRead(flags *f, va_list *list, const char *str,
 
 int checkEmpty(const char *str) {
   int count = 0;
-  int len = (int)strlen(str);  // заменить на  свою
+  int len = (int)strlen(str);
   for (int i = 0; i < len; i++) {
     if (str[i] == ' ') count++;
   }
@@ -417,12 +417,6 @@ long long int readDec(const char *str, flags *f) {
   f->isSpec = 0;
   long long int lld = 0;
   int countRead = 1;
-  //  while (f->haveSpace && !f->noRead && f->strIndex < f->strLen &&
-  //  !isDigit(str[f->strIndex]) && //возможно и не нужно, нужно посмотреть как
-  //  работает на убунте
-  //      (f->width <= 0 || (f->width && countRead <= f->width))) {
-  //    f->strIndex++;
-  //  }
   while (!f->noRead && f->strIndex < f->strLen && isDigit(str[f->strIndex]) &&
          (f->width <= 0 || (f->width && countRead <= f->width))) {
     f->isSpec = 1;
