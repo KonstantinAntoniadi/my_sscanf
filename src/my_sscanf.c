@@ -1,12 +1,12 @@
-#include "s21_sscanf.h"
+#include "my_sscanf.h"
 
-int s21_sscanf(const char *str, const char *format, ...) {
+int my_sscanf(const char *str, const char *format, ...) {
   va_list list;
   va_start(list, format);
   flags f = {0};
   f.go = 1;
   f.res = -1;
-  if (str != s21_NULL && format != s21_NULL) {
+  if (str != MY_NULL && format != MY_NULL) {
     f.formatLen = strlen(format);
     f.strLen = strlen(str);
     parseAndRead(&f, &list, str, format);
@@ -18,10 +18,10 @@ int s21_sscanf(const char *str, const char *format, ...) {
 void parseAndRead(flags *f, va_list *list, const char *str,
                   const char *format) {
   f->isSpec = 1;
-  f->lineS = s21_NULL;
+  f->lineS = MY_NULL;
   f->specCount = 0;
   f->res = 0;
-  for (s21_size_t i = 0; i < f->formatLen && f->isSpec && f->go; i++) {
+  for (my_size_t i = 0; i < f->formatLen && f->isSpec && f->go; i++) {
     f->isLong = 0;
     f->isShort = 0;
     f->isLongDouble = 0;
@@ -47,8 +47,8 @@ void parseAndRead(flags *f, va_list *list, const char *str,
 
   if (checkEmpty(str) && checkEmpty(format))
     f->res = 0;
-  else if (checkEmpty(str) || f->formatLen == 0 || format == s21_NULL ||
-           str == s21_NULL)
+  else if (checkEmpty(str) || f->formatLen == 0 || format == MY_NULL ||
+           str == MY_NULL)
     f->res = -1;
 }
 
@@ -289,7 +289,7 @@ long double readFloat(const char *str, flags *f) {
     }
   }
   if (power) {
-    for (s21_size_t i = 0; i < power; i++) {
+    for (my_size_t i = 0; i < power; i++) {
       if (isNeg)
         lf /= 10;
       else
@@ -373,8 +373,8 @@ void readPercent(const char *str, flags *f) {
 
 char *readS(const char *str, flags *f) {
   f->isSpec = 0;
-  s21_size_t lineSize = 1;
-  char *lineS = s21_NULL;
+  my_size_t lineSize = 1;
+  char *lineS = MY_NULL;
   int countRead = 1;
   while (f->strIndex < f->strLen &&
          (str[f->strIndex] == ' ' || str[f->strIndex] == '\t' ||
@@ -394,8 +394,8 @@ char *readS(const char *str, flags *f) {
 
 char *readC(const char *str, flags *f) {
   f->isSpec = 0;
-  s21_size_t lineSize = 1;
-  char *lineS = s21_NULL;
+  my_size_t lineSize = 1;
+  char *lineS = MY_NULL;
   int countRead = 1;
   while (f->haveSpace && f->strIndex < f->strLen &&
          (str[f->strIndex] == ' ' || str[f->strIndex] == '\t' ||
@@ -435,7 +435,7 @@ long long int readDec(const char *str, flags *f) {
 void readSign(flags *f, const char *str, char c) {
   int good = 0;
   char *spec = "dfeEgGaAxXopiu";
-  for (s21_size_t i = 0; i < strlen(spec) && !good; i++) {
+  for (my_size_t i = 0; i < strlen(spec) && !good; i++) {
     if (c == spec[i]) good = 1;
   }
   if (good) {
@@ -466,7 +466,7 @@ void readSign(flags *f, const char *str, char c) {
   }
 }
 
-void readInfo(flags *f, const char *format, s21_size_t *i) {
+void readInfo(flags *f, const char *format, my_size_t *i) {
   f->width = 0;
   f->skipWrite = 0;
   (*i)++;
@@ -503,10 +503,10 @@ int compareLetter(char need, char check) {
   return res;
 }
 
-void addEl(char **line, s21_size_t *size, char add, flags *f) {
+void addEl(char **line, my_size_t *size, char add, flags *f) {
   f->go = 0;
   (*line) = realloc(*line, (*size + 1) * sizeof(char));
-  if ((*line) != s21_NULL) {
+  if ((*line) != MY_NULL) {
     (*line)[*size - 1] = add;
     (*line)[*size] = '\0';
     (*size)++;

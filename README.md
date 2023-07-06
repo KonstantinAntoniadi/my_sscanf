@@ -1,7 +1,7 @@
 ## Реализация функции sscanf на языке Си
 
 ### Сборка библиотеки
-`make s21_sscanf.a`
+`make my_sscanf.a`
 
 ### Запуск тестирования
 `make test`
@@ -15,6 +15,6 @@ float f;
 unsigned int u;
 int count;
 
-s21_sscanf("124 text 1.231 0xA1", "%d %s %f %u %n", &d, str, &f, &u, &count);
+my_sscanf("124 text 1.231 0xA1", "%d %s %f %u %n", &d, str, &f, &u, &count);
 ```
 

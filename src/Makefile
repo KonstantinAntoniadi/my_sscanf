@@ -8,20 +8,19 @@ else
 TEST_LIBS = -lcheck -lm -lpthread -fprofile-arcs -ftest-coverage
 endif
 
-all: clean s21_sscanf.a test
+all: clean my_sscanf.a test
 
-test: clean s21_sscanf.a
-	gcc unit_test.c s21_sscanf.c s21_sscanf.a $(TEST_LIBS) -o unit_test
+test: clean my_sscanf.a
+	gcc unit_test.c my_sscanf.c my_sscanf.a $(TEST_LIBS) -o unit_test
 	./unit_test
 
-s21_sscanf.a: s21_sscanf.o
-	ar -crs s21_sscanf.a s21_sscanf.o
+my_sscanf.a: my_sscanf.o
+	ar -crs my_sscanf.a my_sscanf.o
 
-s21_sscanf.o:
-	gcc $(FLAGS) -c s21_sscanf.c
+my_sscanf.o:
+	gcc $(FLAGS) -c my_sscanf.c
 
 clean:
-	rm -rf s21_string
 	rm -rf *.o *.a
 	rm -rf *.gcno *.gcda
 	rm -rf unit_test

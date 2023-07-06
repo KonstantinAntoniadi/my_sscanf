@@ -3,21 +3,21 @@
 #include <stdlib.h>
 #include <string.h>
 
-#ifndef SRC_S21_SSCANF_H_
-#define SRC_S21_SSCANF_H_
+#ifndef SRC_MY_SSCANF_H_
+#define SRC_MY_SSCANF_H_
 
-#define s21_NULL (void *)0
+#define MY_NULL (void *)0
 
-typedef unsigned long long s21_size_t;
+typedef unsigned long long my_size_t;
 
 typedef struct {
   int isMinus;
   long long int width;
   long long int d;
   long double ld;
-  s21_size_t strLen;
-  s21_size_t formatLen;
-  s21_size_t strIndex;
+  my_size_t strLen;
+  my_size_t formatLen;
+  my_size_t strIndex;
   int noRead;
   int isSpec;
   int isLong;
@@ -35,7 +35,7 @@ typedef struct {
 
 } flags;
 
-int s21_sscanf(const char *str, const char *format, ...);
+int my_sscanf(const char *str, const char *format, ...);
 
 int checkEmpty(const char *str);
 void writeDI(flags *f, va_list *list);
@@ -61,9 +61,9 @@ void readSpec(flags *f, const char *str, char spec);
 int compareLetter(char need, char check);
 int charToDigit(char c);
 int isDigit(char c);
-void readInfo(flags *f, const char *format, s21_size_t *i);
-void addEl(char **line, s21_size_t *size, char add, flags *f);
+void readInfo(flags *f, const char *format, my_size_t *i);
+void addEl(char **line, my_size_t *size, char add, flags *f);
 int hexToDigit(char c);
 void readSign(flags *f, const char *str, char c);
 
-#endif  // SRC_S21_SSCANF_H_
+#endif  // SRC_MY_SSCANF_H_
